@@ -1,0 +1,116 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class Book <<Entity>> {
+-bookId: Long
+-author: String
+-name: String
+-price: Double
+-status: String
+-edition: Integer
+-dateOfPurchase: Date
+
++getTitle()
++getAuthor()
++changeOwner()
++display()
++updateStatus()
+}
+
+class Person <<Entity>> {
+-name: String
+
++whoyouare()
+}
+
+class Reader <<Entity>> {
+-books: List<Book>
+
++purchaseBook()
++returnBook()
++showBook()
++whoyouare()
+}
+
+class Author <<Entity>> {
+-books: List<Book>
+
++newBook()
++showBook()
++whoyouare()
+}
+
+class Library <<Entity>> {
+-books: List<Book>
+-readers: List<Reader>
+
++getBook()
++getReader()
++newBook()
++lendBook()
++takeBackBook()
++showBook()
+}
+
+class Librarian <<Entity>> {
+-name: String
+-password: String
+
++searchBook()
++verifyMember()
++issueBook()
++calculateFine()
++createBill()
++returnBook()
+}
+
+class memberRecord <<Entity>> {
+-memberId: Long
+-type: String
+-dateOfMembership: Date
+-noBooksIssued: Integer
+-maxBookLimit: Integer
+-name: String
+-address: Address
+-phoneNo: String
+
++getMember()
++incBookIssued()
++decBookIssued()
++payBill()
+}
+
+class Address <<ValueClass>> {
+-street: String
+-district: String
+-postalCode: Integer
+}
+
+class Journals <<Entity>> {
+}
+
+class StudyBooks <<Entity>> {
+}
+
+class Magazines <<Entity>> {
+}
+
+class Student <<Entity>> {
+}
+
+class Faculty <<Entity>> {
+}
+
+Student --up|> memberRecord
+Faculty --up|> memberRecord
+memberRecord *--> Address
+
+Journals --up|> Book
+StudyBooks --up|> Book
+Magazines --up|> Book
+
+Reader --up|> Person
+Author --up|> Person
+
+
+@enduml
