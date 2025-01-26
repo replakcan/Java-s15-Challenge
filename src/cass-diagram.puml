@@ -1,0 +1,82 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class Book <<Value Object>> {
+-id: Long
+-title: String
+-author: String
+-price: Double
+-status: Status
+-edition: Integer
+}
+
+class Person <<Entity>> {
+-firstName: String
+-lastName: String
+-age: Integer
+-role: Role
+-address: Address
+}
+
+class Client <<Entity>> {
+-books: List<Book>
+
++rentBook()
++reserveBook()
+}
+
+class Librarian <<Entity>> {
+-library: Library
+
++invoice()
++updateBorrowList()
++updateBookInfo()
++addBook()
++removeBook()
+}
+
+class Library <<Entity>> {
+-bookList: List<Book>
+-address: Address
+}
+
+class Address <<Value Object>> {
+-street: String
+-district: String
+-postalCode: Integer
+}
+
+class Journal <<Entity>> {
+}
+
+class StudyBook <<Entity>> {
+}
+
+class Magazine <<Entity>> {
+}
+
+enum Status <<Value Object>> {
+AVAILABLE
+UNAVAILABLE
+}
+
+enum Role <<Value Object>> {
+CLIENT
+LIBRARIAN
+}
+
+Book *--left> Status
+Person *--left> Role
+Person *--> Address
+Librarian *--> Library
+Library *--up> Address
+
+
+Journal --up|> Book
+StudyBook --up|> Book
+Magazine --up|> Book
+
+Client --up|> Person
+Librarian --up|> Person
+
+@enduml
