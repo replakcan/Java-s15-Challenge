@@ -1,5 +1,7 @@
 package entity;
 
+import entity.book.Book;
+
 import java.util.List;
 
 public class Library {

@@ -1,4 +1,9 @@
-package entity;
+package entity.user;
+
+import entity.*;
+import entity.book.Book;
+import entity.book.BookType;
+import entity.book.Status;
 
 import java.util.List;
 import java.util.Map;

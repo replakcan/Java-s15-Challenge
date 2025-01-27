@@ -1,4 +1,6 @@
-package entity;
+package entity.user;
+
+import entity.Address;
 
 public class User {
     private String firstName;

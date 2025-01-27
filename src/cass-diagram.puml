@@ -73,7 +73,7 @@ STUDY_BOOK
 MAGAZINE
 }
 
-stereotype BorrowDetail <<record>> {
+stereotype BorrowDetail <<Record>> {
 -renter: Client
 -rentedBook: Book
 -daysRentedFor: Integer

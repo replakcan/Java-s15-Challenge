@@ -1,4 +1,4 @@
-package entity;
+package entity.book;
 
 public enum BookType {
     NOVEL,

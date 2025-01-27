@@ -1,4 +1,7 @@
-package entity;
+package entity.user;
+
+import entity.Address;
+import entity.book.Book;
 
 import java.util.List;
 
