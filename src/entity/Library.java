@@ -27,4 +27,12 @@ public class Library {
     public void setAddress(Address address) {
         this.address = address;
     }
+
+    @Override
+    public String toString() {
+        return "Library{" +
+                "bookList=" + bookList +
+                ", address=" + address +
+                '}';
+    }
 }

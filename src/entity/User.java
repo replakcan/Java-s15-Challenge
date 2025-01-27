@@ -1,13 +1,16 @@
 package entity;
 
-public class Person {
+public class User {
     private String firstName;
     private String lastName;
     private Integer age;
     private Address address;
     private Role role;
 
-    public Person(String firstName, String lastName, Integer age, Address address, Role role) {
+    public User() {
+    }
+
+    public User(String firstName, String lastName, Integer age, Address address, Role role) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
@@ -49,5 +52,16 @@ public class Person {
 
     public Role getRole() {
         return role;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", age=" + age +
+                ", address=" + address +
+                ", role=" + role +
+                '}';
     }
 }

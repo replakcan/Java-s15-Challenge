@@ -1,7 +1,5 @@
 package entity;
 
-import java.util.Date;
-
 public class Book {
 
     private Long id;
@@ -10,14 +8,24 @@ public class Book {
     private Double price;
     private Status status;
     private Integer edition;
+    private BookType bookType;
 
-    public Book(Long id, String title, String author, Double price, Status status, Integer edition) {
+    public Book(Long id, String title, String author, Double price, Integer edition, BookType bookType) {
         this.id = id;
         this.title = title;
         this.author = author;
         this.price = price;
-        this.status = status;
         this.edition = edition;
+        this.bookType = bookType;
+        this.status = Status.AVAILABLE;
+    }
+
+    public BookType getBookType() {
+        return bookType;
+    }
+
+    public void setBookType(BookType bookType) {
+        this.bookType = bookType;
     }
 
     public Long getId() {
@@ -66,5 +74,18 @@ public class Book {
 
     public void setEdition(Integer edition) {
         this.edition = edition;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                ", price=" + price +
+                ", status=" + status +
+                ", edition=" + edition +
+                ", bookType=" + bookType +
+                '}';
     }
 }
