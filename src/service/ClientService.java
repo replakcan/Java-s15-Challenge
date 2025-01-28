@@ -14,6 +14,7 @@ public interface ClientService {
     Book searchBookByTitle(Library library, String title);
     List<Book> searchBookByAuthor(Library library, String author);
     List<Book> sortBooksByPrice(Library library);
+    List<Book> sortBooksByPriceDesc(Library library);
     List<Book> sortBooksByTitle(Library library);
     List<Book> searchBooksByCategory(Library library, BookType bookType);
 }

@@ -23,6 +23,14 @@ class User <<Entity>> {
 class Client <<Entity>> {
 -books: List<Book>
 -wallet: Double
+
+returnBook()
+findAllBooks()
+sortBooksByPrice()
+sortBooksByPriceDesc()
+sortBooksByTitle()
+searchBookByTitle()
+searchBooksByCategory()
 }
 
 interface Bookable {
@@ -32,6 +40,13 @@ rentBook()
 class Librarian <<Entity>> {
 -library: Library
 -borrowList: Map<String, BorrowDetail>
+
+addBook()
+invoice()
+removeBookById()
+displayBookList()
+displayBorrowList()
+takeBackBook()
 }
 
 class Library <<Entity>> {
@@ -86,13 +101,13 @@ Client ..> Bookable
 returnBook()
 findAllBooks()
 sortBooksByPrice()
+sortBooksByPriceDesc()
 sortBooksByTitle()
 searchBookByTitle()
 searchBooksByCategory()
 }
 
 interface LibrarianService {
-removeBook()
 addBook()
 invoice()
 removeBookById()

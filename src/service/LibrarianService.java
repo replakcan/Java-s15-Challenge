@@ -6,7 +6,6 @@ import entity.book.BookType;
 import entity.user.Client;
 
 public interface LibrarianService {
-    Book removeBook(Book book);
     Book addBook(Book book);
     Book addBook(Long id, String title, String author, Double price, Integer edition, BookType bookType);
     BorrowDetail invoice(Client client, Book book, Integer period);

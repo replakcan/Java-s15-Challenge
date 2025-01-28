@@ -15,10 +15,10 @@ public class Main {
     public static void main(String[] args) {
 
         Client alper = new Client("Alper", "Akcan", 28, new Address("Visnelik", "Odunpazari", 26123), new ArrayList<>());
-        Librarian kutuphaneciRustemAbi = new Librarian("Rustem", "Abi", 54, new Address("Beypazari", "Mecidiye", 25352), new Library(new HashMap<>(), new Address("kutuphane", "hanekutup", 1234)), new HashMap<>());
-        Library davutPasha = kutuphaneciRustemAbi.getLibrary();
+        Librarian rustem = new Librarian("Rustem", "Abi", 54, new Address("Beypazari", "Mecidiye", 25352), new Library(new HashMap<>(), new Address("kutuphane", "hanekutup", 1234)), new HashMap<>());
+        Library davutPasha = rustem.getLibrary();
 
-        LibrarianService librarianService = new LibrarianServiceImpl(kutuphaneciRustemAbi);
+        LibrarianService librarianService = new LibrarianServiceImpl(rustem);
         ClientService clientService = new ClientServiceImpl(alper, librarianService);
 
         Book book_0 =new Book ("Sadece Şeyma", "Şeyma Subaşı", 0D, 1, BookType.NOVEL);
@@ -30,7 +30,6 @@ public class Main {
         Book book_6 = new Book("National Geographic", "White House", 12d, 2, BookType.MAGAZINE);
         Book book_7 = new Book("Adım Adım Matematik", "KitapeviYayinlari", 12d, 2, BookType.STUDY_BOOK);
 
-
         librarianService.addBook(book_0);
         librarianService.addBook(book_1);
         librarianService.addBook(book_2);
@@ -40,20 +39,25 @@ public class Main {
         librarianService.addBook(book_6);
         librarianService.addBook(book_7);
 
+        // librarian operations
         librarianService.invoice(alper, book_2, 5);
         librarianService.invoice(alper, book_5, 12);
-
-
+        librarianService.removeBookById(book_7.getId());
         librarianService.displayBookList();
         librarianService.displayBorrowList();
+        librarianService.takeBackBook(alper, book_2);
+        librarianService.displayBookList();
 
+        //client operations
+        clientService.addCredit(244d);
+        clientService.findAllBooks(davutPasha);
         clientService.searchBookByTitle(davutPasha, "Sadece Şeyma");
         clientService.searchBookByAuthor(davutPasha, "Stephen King");
         clientService.sortBooksByPrice(davutPasha);
+        clientService.sortBooksByPriceDesc(davutPasha);
         clientService.sortBooksByTitle(davutPasha);
-        clientService.searchBooksByCategory(davutPasha, BookType.NOVEL);
+        clientService.searchBooksByCategory(davutPasha, BookType.MAGAZINE);
 
-        System.out.println("CLIENT: " + alper);
-        System.out.println("LIBRARIAN: " + kutuphaneciRustemAbi);
+
     }
 }

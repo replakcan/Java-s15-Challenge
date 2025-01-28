@@ -41,7 +41,7 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public void addCredit(Double credit) {
         this.client.setWallet(this.client.getWallet() + credit);
-        System.out.println(credit + " credit cüzdanınıza eklendi!");
+        System.out.println(credit + " credit cüzdanınıza eklendi! Yeni cüzdan limiti: " + this.client.getWallet() + "\n");
     }
 
     @Override
@@ -55,11 +55,11 @@ public class ClientServiceImpl implements ClientService {
 
         for (Book book : bookList) {
             if (book.getTitle() == title) {
-                System.out.println(book);
+                System.out.println("BOOK_WITH_TITLE: " + title + "\n" + book + "\n");
                 return book;
             }
         }
-        throw new ClientException("There is no book in the system with given title");
+        throw new ClientException("There is no book in the system with given title: " + title);
     }
 
     @Override
@@ -75,9 +75,14 @@ public class ClientServiceImpl implements ClientService {
             }
         }
 
-        if (resultList.size() == 0) throw new ClientException("There are no books with provided author name");
+        if (resultList.size() == 0) throw new ClientException("There are no books with provided author name: " + author);
 
-        System.out.println(resultList);
+        int range = resultList.size();
+        System.out.println("FILTERED_WITH_AUTHOR: " + author + "\n------------------------------------------------------------------------");
+        for (int i = 0; i < range; i++) {
+            System.out.println(resultList.get(i));
+        }
+        System.out.println("------------------------------------------------------------------------");
         return resultList;
     }
 
@@ -87,6 +92,20 @@ public class ClientServiceImpl implements ClientService {
         List<Book> sortedList = bookList.stream().sorted().toList();
         int range = sortedList.size();
         System.out.println("SORTED_BY_PRICE:\n------------------------------------------------------------------------");
+        for (int i = 0; i < range; i++) {
+            System.out.println(sortedList.get(i));
+        }
+        System.out.println("------------------------------------------------------------------------");
+
+        return sortedList;
+    }
+
+    @Override
+    public List<Book> sortBooksByPriceDesc(Library library) {
+        List<Book> bookList = library.getBookList().values().stream().toList();
+        List<Book> sortedList = bookList.stream().sorted(Comparator.reverseOrder()).toList();
+        int range = sortedList.size();
+        System.out.println("SORTED_BY_PRICE_DESC:\n------------------------------------------------------------------------");
         for (int i = 0; i < range; i++) {
             System.out.println(sortedList.get(i));
         }
@@ -115,7 +134,7 @@ public class ClientServiceImpl implements ClientService {
         List<Book> bookList = library.getBookList().values().stream().toList();
         List<Book> categoryList = new ArrayList<>();
         Iterator<Book> iterator = bookList.iterator();
-        System.out.println("BOOKS_WITH_CATEGORY_" + bookType + ":\n------------------------------------------------------------------------");
+        System.out.println("BOOKS_WITH_CATEGORY: " + bookType + ":\n------------------------------------------------------------------------");
         while (iterator.hasNext()) {
             Book book = iterator.next();
             if (book.getBookType().equals(bookType)) {

@@ -40,5 +40,4 @@ public class Client extends User implements Bookable {
         return book;
     }
 
-
 }

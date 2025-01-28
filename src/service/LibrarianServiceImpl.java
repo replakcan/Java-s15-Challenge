@@ -8,10 +8,7 @@ import entity.user.Client;
 import entity.user.Librarian;
 import exception.LibrarianException;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 public class LibrarianServiceImpl implements LibrarianService{
 
@@ -19,13 +16,6 @@ public class LibrarianServiceImpl implements LibrarianService{
 
     public LibrarianServiceImpl(Librarian librarian) {
         this.librarian = librarian;
-    }
-
-    @Override
-    public Book removeBook(Book book) {
-        this.librarian.getLibrary().getBookList().remove(book);
-
-        return book;
     }
 
     @Override
@@ -66,14 +56,27 @@ public class LibrarianServiceImpl implements LibrarianService{
 
     @Override
     public Book removeBookById(String bookId) {
-        Map<String, Book> libraryBooks = this.librarian.getLibrary().getBookList();
-        Book book = libraryBooks.get(bookId);
-        if (book != null) {
-            libraryBooks.remove(bookId);
-            System.out.println(book.getTitle() + " sistemden silindi.");
-            return book;
+        Map<String, Book> bookMap = this.librarian.getLibrary().getBookList();
+        List<Book> libraryBooks = bookMap.values().stream().toList();
+        Book bookToDelete = null;
+        for (Book book : libraryBooks) {
+            if (book.getId().equals(bookId)) {
+                bookToDelete = book;
+                break;
+            }
         }
-        throw new LibrarianException("Couldn't find any book with given id");
+
+        if (bookToDelete == null) throw new LibrarianException("No book with given id");
+
+        Iterator<Map.Entry<String, Book>> iterator = bookMap.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<String, Book> entry = iterator.next();
+            if (entry.getValue().equals(bookToDelete)) {
+                iterator.remove();
+                System.out.println(bookToDelete.getTitle() + " sistemden kaldırıldı.");
+            }
+        }
+       return bookToDelete;
     }
 
     @Override
@@ -111,7 +114,6 @@ public class LibrarianServiceImpl implements LibrarianService{
                 this.librarian.getBorrowList().remove(borrowDetail);
             }
         }
-
         return book;
     }
 }
