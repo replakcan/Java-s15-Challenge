@@ -3,6 +3,10 @@ import entity.book.Book;
 import entity.book.BookType;
 import entity.user.Client;
 import entity.user.Librarian;
+import service.ClientService;
+import service.ClientServiceImpl;
+import service.LibrarianService;
+import service.LibrarianServiceImpl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,11 +14,12 @@ import java.util.HashMap;
 public class Main {
     public static void main(String[] args) {
 
-        Client client = new Client("Alper", "Akcan", 28, new Address("Visnelik", "Odunpazari", 26123), new ArrayList<>());
-
+        Client alper = new Client("Alper", "Akcan", 28, new Address("Visnelik", "Odunpazari", 26123), new ArrayList<>());
         Librarian kutuphaneciRustemAbi = new Librarian("Rustem", "Abi", 54, new Address("Beypazari", "Mecidiye", 25352), new Library(new HashMap<>(), new Address("kutuphane", "hanekutup", 1234)), new HashMap<>());
-
         Library davutPasha = kutuphaneciRustemAbi.getLibrary();
+
+        LibrarianService librarianService = new LibrarianServiceImpl(kutuphaneciRustemAbi);
+        ClientService clientService = new ClientServiceImpl(alper, librarianService);
 
         Book book_0 =new Book ("Sadece Şeyma", "Şeyma Subaşı", 0D, 1, BookType.NOVEL);
         Book book_1 = new Book("Bad Little Kid", "Stephen King", 32d, 2, BookType.NOVEL);
@@ -26,26 +31,26 @@ public class Main {
         Book book_7 = new Book("Adım Adım Matematik", "KitapeviYayinlari", 12d, 2, BookType.STUDY_BOOK);
 
 
-        kutuphaneciRustemAbi.addBook(book_0);
-        kutuphaneciRustemAbi.addBook(book_1);
-        kutuphaneciRustemAbi.addBook(book_2);
-        kutuphaneciRustemAbi.addBook(book_3);
-        kutuphaneciRustemAbi.addBook(book_4);
-        kutuphaneciRustemAbi.addBook(book_5);
-        kutuphaneciRustemAbi.addBook(book_6);
-        kutuphaneciRustemAbi.addBook(book_7);
+        librarianService.addBook(book_0);
+        librarianService.addBook(book_1);
+        librarianService.addBook(book_2);
+        librarianService.addBook(book_3);
+        librarianService.addBook(book_4);
+        librarianService.addBook(book_5);
+        librarianService.addBook(book_6);
+        librarianService.addBook(book_7);
 
-        kutuphaneciRustemAbi.invoice(client, book_2, 5);
-        kutuphaneciRustemAbi.invoice(client, book_5, 12);
+        librarianService.invoice(alper, book_2, 5);
+        librarianService.invoice(alper, book_5, 12);
 
 
-        kutuphaneciRustemAbi.displayBookList();
-        kutuphaneciRustemAbi.displayBorrowList();
+        librarianService.displayBookList();
+        librarianService.displayBorrowList();
 
-        /*client.searchBookByTitle(davutPasha, "Sadece Şeyma");
-        client.searchBookByAuthor(davutPasha, "Stephen King");*/
-        client.sortBooksByPrice(davutPasha);
-        client.sortBooksByTitle(davutPasha);
-        client.searchBooksByCategory(davutPasha, BookType.NOVEL);
+        /*clientService.searchBookByTitle(davutPasha, "Sadece Şeyma");
+        clientService.searchBookByAuthor(davutPasha, "Stephen King");*/
+        clientService.sortBooksByPrice(davutPasha);
+        clientService.sortBooksByTitle(davutPasha);
+        clientService.searchBooksByCategory(davutPasha, BookType.NOVEL);
     }
 }

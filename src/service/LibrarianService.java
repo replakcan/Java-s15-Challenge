@@ -1,12 +1,11 @@
-package userInterfaces;
+package service;
 
-import entity.BorrowDetail;
+import dto.BorrowDetail;
 import entity.book.Book;
 import entity.book.BookType;
 import entity.user.Client;
 
-public interface Manageable {
-
+public interface LibrarianService {
     Book removeBook(Book book);
     Book addBook(Book book);
     Book addBook(Long id, String title, String author, Double price, Integer edition, BookType bookType);

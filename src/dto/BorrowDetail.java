@@ -1,4 +1,4 @@
-package entity;
+package dto;
 
 public record BorrowDetail(String clientName, String bookId, Integer daysRentedFor, Double price, Long timestamp) {
     @Override
