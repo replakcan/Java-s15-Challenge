@@ -11,7 +11,7 @@ class Book <<Entity>> {
 -bookType: BookType
 }
 
-class Person <<Entity>> {
+class User <<Entity>> {
 -firstName: String
 -lastName: String
 -age: Integer
@@ -82,8 +82,8 @@ stereotype BorrowDetail <<Record>> {
 }
 
 Book *--left> Status
-Person *--left> Role
-Person *--> Address
+User *--left> Role
+User *--> Address
 Librarian *--> Library
 Library *--up> Address
 Book *--right> BookType
@@ -92,7 +92,7 @@ Journal --up|> Book
 StudyBook --up|> Book
 Magazine --up|> Book
 
-Client --up|> Person
-Librarian --up|> Person
+Client --up|> User
+Librarian --up|> User
 
 @enduml

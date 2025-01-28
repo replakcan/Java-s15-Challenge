@@ -2,7 +2,7 @@
 'https://plantuml.com/class-diagram
 
 class Book <<Entity>> {
--id: Long
+-id: String
 -title: String
 -author: String
 -price: Double
@@ -11,7 +11,7 @@ class Book <<Entity>> {
 -bookType: BookType
 }
 
-class Person <<Entity>> {
+class User <<Entity>> {
 -firstName: String
 -lastName: String
 -age: Integer
@@ -21,40 +21,40 @@ class Person <<Entity>> {
 
 class Client <<Entity>> {
 -books: List<Book>
+-wallet: Double
 
 +rentBook()
 +reserveBook()
++findAllBooks()
++searchBookByTitle()
++sortBooksByPrice()
++sortBooksByTitle()
++searchBooksByCategory()
 }
 
 class Librarian <<Entity>> {
 -library: Library
+-borrowList: Map<String, BorrowDetail>
 
-+invoice()
-+updateBorrowList()
-+updateBookInfo()
-+addBook()
 +removeBook()
++addBook()
++invoice()
++removeBookById()
++displayBookList()
++displayBookList()
++takeBackBook()
 }
 
 class Library <<Entity>> {
--bookList: List<Book>
+-bookList: Map<String, Book>
 -address: Address
--borrowList: Set<BorrowDetail>
+-register: Double
 }
 
 class Address <<Value Object>> {
 -street: String
 -district: String
 -postalCode: Integer
-}
-
-class Journal <<Entity>> {
-}
-
-class StudyBook <<Entity>> {
-}
-
-class Magazine <<Entity>> {
 }
 
 enum Status <<Value Object>> {
@@ -68,31 +68,28 @@ LIBRARIAN
 }
 
 enum BookType <<Value Object>> {
+NOVEL
 JOURNAL
 STUDY_BOOK
 MAGAZINE
 }
 
 stereotype BorrowDetail <<Record>> {
--renter: Client
--rentedBook: Book
+-clientName: String
+-bookId: String
 -daysRentedFor: Integer
 -cost: Double
--timestamp: Double
+-timestamp: Long
 }
 
 Book *--left> Status
-Person *--left> Role
-Person *--> Address
+User *--left> Role
+User *--> Address
 Librarian *--> Library
 Library *--up> Address
 Book *--right> BookType
 
-Journal --up|> Book
-StudyBook --up|> Book
-Magazine --up|> Book
-
-Client --up|> Person
-Librarian --up|> Person
+Client --up|> User
+Librarian --up|> User
 
 @enduml

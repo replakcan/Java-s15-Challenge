@@ -1,8 +1,11 @@
 package entity.book;
 
-public class Book {
+import java.util.Objects;
+import java.util.UUID;
 
-    private Long id;
+public class Book implements Comparable<Book> {
+
+    private String id;
     private String title;
     private String author;
     private Double price;
@@ -10,14 +13,14 @@ public class Book {
     private Integer edition;
     private BookType bookType;
 
-    public Book(Long id, String title, String author, Double price, Integer edition, BookType bookType) {
-        this.id = id;
+    public Book(String title, String author, Double price, Integer edition, BookType bookType) {
         this.title = title;
         this.author = author;
         this.price = price;
         this.edition = edition;
         this.bookType = bookType;
         this.status = Status.AVAILABLE;
+        this.id = UUID.randomUUID().toString();
     }
 
     public BookType getBookType() {
@@ -28,11 +31,11 @@ public class Book {
         this.bookType = bookType;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -87,5 +90,22 @@ public class Book {
                 ", edition=" + edition +
                 ", bookType=" + bookType +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Book book = (Book) o;
+        return Objects.equals(id, book.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
+
+    @Override
+    public int compareTo(Book o) {
+        return this.price.compareTo(o.price);
     }
 }

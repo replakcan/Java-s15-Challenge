@@ -2,23 +2,33 @@ package entity;
 
 import entity.book.Book;
 
-import java.util.List;
+import java.util.Map;
 
 public class Library {
 
-    private List<Book> bookList;
+    private Map<String, Book> bookList;
     private Address address;
+    private Double register;
 
-    public Library(List<Book> bookList, Address address) {
+    public void setRegister(Double register) {
+        this.register = register;
+    }
+
+    public Double getRegister() {
+        return register;
+    }
+
+    public Library(Map<String, Book> bookList, Address address) {
         this.bookList = bookList;
         this.address = address;
+        this.register = 1000000.0;
     }
 
-    public List<Book> getBookList() {
-        return bookList;
+    public Map<String, Book> getBookList() {
+        return this.bookList;
     }
 
-    public void setBookList(List<Book> bookList) {
+    public void setBookList(Map<String, Book> bookList) {
         this.bookList = bookList;
     }
 
