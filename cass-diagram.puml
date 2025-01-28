@@ -12,6 +12,7 @@ class Book <<Entity>> {
 }
 
 class User <<Entity>> {
+-id: String
 -firstName: String
 -lastName: String
 -age: Integer
@@ -22,27 +23,15 @@ class User <<Entity>> {
 class Client <<Entity>> {
 -books: List<Book>
 -wallet: Double
+}
 
-+rentBook()
-+reserveBook()
-+findAllBooks()
-+searchBookByTitle()
-+sortBooksByPrice()
-+sortBooksByTitle()
-+searchBooksByCategory()
+interface Bookable {
+rentBook()
 }
 
 class Librarian <<Entity>> {
 -library: Library
 -borrowList: Map<String, BorrowDetail>
-
-+removeBook()
-+addBook()
-+invoice()
-+removeBookById()
-+displayBookList()
-+displayBookList()
-+takeBackBook()
 }
 
 class Library <<Entity>> {
@@ -91,5 +80,37 @@ Book *--right> BookType
 
 Client --up|> User
 Librarian --up|> User
+Client ..> Bookable
+
+/'interface ClientService {
+returnBook()
+findAllBooks()
+sortBooksByPrice()
+sortBooksByTitle()
+searchBookByTitle()
+searchBooksByCategory()
+}
+
+interface LibrarianService {
+removeBook()
+addBook()
+invoice()
+removeBookById()
+displayBookList()
+displayBorrowList()
+takeBackBook()
+}
+
+class ClientServiceImpl {
+}
+
+class LibrarianServiceImpl {
+}
+
+ClientServiceImpl ..> ClientService
+ClientServiceImpl *--up> Client
+ClientServiceImpl *--> LibrarianServiceImpl
+LibrarianServiceImpl ..> LibrarianService
+LibrarianServiceImpl *--left> Librarian'/
 
 @enduml

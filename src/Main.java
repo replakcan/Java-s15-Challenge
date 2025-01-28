@@ -47,10 +47,13 @@ public class Main {
         librarianService.displayBookList();
         librarianService.displayBorrowList();
 
-        /*clientService.searchBookByTitle(davutPasha, "Sadece Şeyma");
-        clientService.searchBookByAuthor(davutPasha, "Stephen King");*/
+        clientService.searchBookByTitle(davutPasha, "Sadece Şeyma");
+        clientService.searchBookByAuthor(davutPasha, "Stephen King");
         clientService.sortBooksByPrice(davutPasha);
         clientService.sortBooksByTitle(davutPasha);
         clientService.searchBooksByCategory(davutPasha, BookType.NOVEL);
+
+        System.out.println("CLIENT: " + alper);
+        System.out.println("LIBRARIAN: " + kutuphaneciRustemAbi);
     }
 }

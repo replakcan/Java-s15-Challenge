@@ -2,7 +2,12 @@ package entity.user;
 
 import entity.Address;
 
+import java.util.Objects;
+import java.util.UUID;
+
 public class User {
+
+    private String id;
     private String firstName;
     private String lastName;
     private Integer age;
@@ -13,6 +18,7 @@ public class User {
     }
 
     public User(String firstName, String lastName, Integer age, Address address, Role role) {
+        this.id = UUID.randomUUID().toString();
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
@@ -54,6 +60,18 @@ public class User {
 
     public Role getRole() {
         return role;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(id, user.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 
     @Override

@@ -2,10 +2,11 @@ package entity.user;
 
 import entity.Address;
 import entity.book.Book;
+import userInterfaces.Bookable;
 
 import java.util.*;
 
-public class Client extends User {
+public class Client extends User implements Bookable {
 
     private List<Book> books;
     private Double wallet;
@@ -32,10 +33,12 @@ public class Client extends User {
         this.books = books;
     }
 
+    @Override
     public Book rentBook(Book book) {
         this.getBooks().add(book);
         this.setWallet(this.getWallet() - book.getPrice());
         return book;
     }
+
 
 }
