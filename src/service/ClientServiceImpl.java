@@ -5,6 +5,7 @@ import entity.book.Book;
 import entity.book.BookType;
 import entity.user.Client;
 import entity.user.Librarian;
+import exception.ClientException;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -34,7 +35,7 @@ public class ClientServiceImpl implements ClientService {
                 return book;
             }
         }
-        throw new RuntimeException("There is no book with given id");
+        throw new ClientException("There is no book with provided id");
     }
 
     @Override
@@ -58,7 +59,7 @@ public class ClientServiceImpl implements ClientService {
                 return book;
             }
         }
-        throw new RuntimeException("There is no book in the system with given title");
+        throw new ClientException("There is no book in the system with given title");
     }
 
     @Override
@@ -74,7 +75,7 @@ public class ClientServiceImpl implements ClientService {
             }
         }
 
-        if (resultList.size() == 0) throw new RuntimeException("There are no books with provided author name");
+        if (resultList.size() == 0) throw new ClientException("There are no books with provided author name");
 
         System.out.println(resultList);
         return resultList;
@@ -123,7 +124,7 @@ public class ClientServiceImpl implements ClientService {
             }
         }
 
-        if (categoryList.size() == 0) throw new RuntimeException("There are no books with provided category");
+        if (categoryList.size() == 0) throw new ClientException("There are no books with provided category");
 
         return categoryList;
     }

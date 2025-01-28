@@ -6,6 +6,7 @@ import entity.book.BookType;
 import entity.book.Status;
 import entity.user.Client;
 import entity.user.Librarian;
+import exception.LibrarianException;
 
 import java.util.Iterator;
 import java.util.List;
@@ -49,7 +50,7 @@ public class LibrarianServiceImpl implements LibrarianService{
     @Override
     public BorrowDetail invoice(Client client, Book book, Integer period) {
         if(book.getStatus() == Status.UNAVAILABLE) {
-            throw new RuntimeException("Kitap baskasi tarafindan kiralanmis.");
+            throw new LibrarianException("Kitap baskasi tarafindan kiralanmis.");
         }
 
         book.setStatus(Status.UNAVAILABLE);
@@ -72,7 +73,7 @@ public class LibrarianServiceImpl implements LibrarianService{
             System.out.println(book.getTitle() + " sistemden silindi.");
             return book;
         }
-        throw new RuntimeException("couldn't find a book with given id");
+        throw new LibrarianException("Couldn't find any book with given id");
     }
 
     @Override
