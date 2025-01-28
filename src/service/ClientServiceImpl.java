@@ -38,6 +38,12 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
+    public void addCredit(Double credit) {
+        this.client.setWallet(this.client.getWallet() + credit);
+        System.out.println(credit + " credit cüzdanınıza eklendi!");
+    }
+
+    @Override
     public List<Book> findAllBooks(Library library) {
         return library.getBookList().values().stream().toList();
     }

@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface ClientService {
     Book returnBook(Librarian librarian, String  bookId);
+    void addCredit(Double credit);
     List<Book> findAllBooks(Library library);
     Book searchBookByTitle(Library library, String title);
     List<Book> searchBookByAuthor(Library library, String author);
