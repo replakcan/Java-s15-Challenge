@@ -31,7 +31,8 @@ public class ClientServiceImpl implements ClientService {
                 libraryBookList.put(UUID.randomUUID().toString(), book);
                 this.librarianService.takeBackBook(this.client, book);
                 this.client.setWallet(this.client.getWallet() + book.getPrice());
-                System.out.println("Kitap geri iade edildi");
+                System.out.println("Book refunded: " + book);
+                System.out.println(book.getTitle() + "'s new status value: " + book.getStatus());
                 return book;
             }
         }

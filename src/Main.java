@@ -45,7 +45,6 @@ public class Main {
         librarianService.removeBookById(book_7.getId());
         librarianService.displayBookList();
         librarianService.displayBorrowList();
-        librarianService.takeBackBook(alper, book_2);
         librarianService.displayBookList();
 
         //client operations
@@ -57,5 +56,6 @@ public class Main {
         clientService.sortBooksByPriceDesc(davutPasha);
         clientService.sortBooksByTitle(davutPasha);
         clientService.searchBooksByCategory(davutPasha, BookType.MAGAZINE);
+        clientService.returnBook(rustem, book_2.getId());
     }
 }
