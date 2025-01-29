@@ -10,6 +10,7 @@ import exception.LibrarianException;
 
 import java.util.*;
 
+//TODO [Alper] update invoice and client refund money based on the days that displayed at borrowDetail
 public class LibrarianServiceImpl implements LibrarianService{
 
     private Librarian librarian;
@@ -49,8 +50,10 @@ public class LibrarianServiceImpl implements LibrarianService{
 
         String invoiceId = UUID.randomUUID().toString();
         this.librarian.getBorrowList().put(invoiceId, borrowDetail);
-
+        Double libraryRegister = this.librarian.getLibrary().getRegister();
+        this.librarian.getLibrary().setRegister(libraryRegister + book.getPrice());
         client.rentBook(book);
+        System.out.println("BORROW_DETAIL: " + borrowDetail + "\n");
         return borrowDetail;
     }
 

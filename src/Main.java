@@ -57,7 +57,5 @@ public class Main {
         clientService.sortBooksByPriceDesc(davutPasha);
         clientService.sortBooksByTitle(davutPasha);
         clientService.searchBooksByCategory(davutPasha, BookType.MAGAZINE);
-
-
     }
 }
