@@ -47,7 +47,13 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public List<Book> findAllBooks(Library library) {
-        return library.getBookList().values().stream().toList();
+        List<Book> allBooks = library.getBookList().values().stream().toList();
+        System.out.println("ALL_BOOKS: \n------------------------------------------------------------------------");
+        for(Book book : allBooks) {
+            System.out.println(book);
+        }
+        System.out.println("------------------------------------------------------------------------");
+        return allBooks;
     }
 
     @Override
